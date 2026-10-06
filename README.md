@@ -12,7 +12,19 @@ dprint has no channel for lint diagnostics, so the plugin does two things:
 
 ## Usage
 
-Build the Wasm plugin and reference it in `dprint.json`:
+From a release (replace `0.1.0` with the version you want):
+
+```sh
+dprint add oriontvv/dprint-plugin-changelog
+```
+
+```jsonc
+{
+  "plugins": ["https://plugins.dprint.dev/oriontvv/dprint-plugin-changelog-0.1.0.wasm"]
+}
+```
+
+Or build the Wasm plugin yourself and reference the file in `dprint.json`:
 
 ```sh
 cargo build --release --target wasm32-unknown-unknown --features wasm
@@ -78,6 +90,12 @@ cargo test
 
 Format specs live in `tests/specs/*.txt` (`!! message !!`, `[expect]`), lint rules are tested in
 `tests/lint_test.rs`.
+
+## Releasing
+
+1. Set `version` in `Cargo.toml` and commit.
+2. Push a tag equal to that version, without a `v` prefix: `git tag 0.1.0 && git push origin 0.1.0`.
+
 
 ## License
 

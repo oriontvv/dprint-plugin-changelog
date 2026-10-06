@@ -26,3 +26,69 @@ jobs:
       CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
+  # plugins.dprint.dev has no upload step: it serves the `plugin.wasm` and `schema.json` assets of the
+  # latest GitHub Release. The release is created by the job above, so this one only attaches the assets.
+  # The tag must equal the version in Cargo.toml and have no `v` prefix, because the plugin reports
+  # `config_schema_url` as plugins.dprint.dev/<owner>/<repo>/<version>/schema.json.
+  dprint-plugin:
+    name: Publish to plugins.dprint.dev
+    needs: release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Check the tag matches the crate version
+        id: version
+        run: |
+          version="$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version')"
+          if [ "$GITHUB_REF_NAME" != "$version" ]; then
+            echo "::error::tag '$GITHUB_REF_NAME' does not match the version '$version' in Cargo.toml"
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build plugin.wasm
+        run: |
+          cargo build --locked --release --target wasm32-unknown-unknown --features wasm
+          mkdir -p dist
+          cp target/wasm32-unknown-unknown/release/dprint_plugin_changelog.wasm dist/plugin.wasm
+
+      - name: Create schema.json
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          sed "s|/0\.0\.0/schema\.json|/${VERSION}/schema.json|" deployment/schema.json > dist/schema.json
+          jq empty dist/schema.json
+          grep -q "dprint-plugin-changelog/${VERSION}/schema.json" dist/schema.json \
+            || { echo "::error::schema.json \$id was not updated to ${VERSION}"; exit 1; }
+
+      - name: Check the Wasm module
+        run: |
+          # every Wasm module starts with the magic bytes \0asm
+          [ "$(head -c 4 dist/plugin.wasm | od -An -c | tr -d ' ')" = '\0asm' ] \
+            || { echo "::error::plugin.wasm is not a Wasm module"; exit 1; }
+          # the dprint CLI refuses plugins that do not export their schema version
+          grep -aq "dprint_plugin_version_4" dist/plugin.wasm \
+            || { echo "::error::plugin.wasm does not export dprint_plugin_version_4"; exit 1; }
+
+      - name: Upload assets to the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" dist/plugin.wasm dist/schema.json --clobber
+
+      - name: Print the plugin url
+        run: |
+          {
+            echo "### Published ${GITHUB_REF_NAME}"
+            echo
+            echo '```json'
+            echo "\"plugins\": [\"https://plugins.dprint.dev/${GITHUB_REPOSITORY}-${GITHUB_REF_NAME}.wasm\"]"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
