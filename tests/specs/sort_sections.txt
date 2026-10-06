@@ -1,0 +1,30 @@
+~~ sortSections: true ~~
+!! should sort sections in the Keep a Changelog order !!
+## [1.0.0] - 2024-01-01
+
+### Security
+
+- Patched.
+
+### Fixed
+
+- Bug.
+
+### Added
+
+- Thing.
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+### Fixed
+
+- Bug.
+
+### Security
+
+- Patched.

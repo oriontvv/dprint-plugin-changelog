@@ -1,0 +1,18 @@
+~~ removeEmptySections: false ~~
+!! should keep empty sections when configured !!
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+### Removed
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+### Removed

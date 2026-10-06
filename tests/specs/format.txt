@@ -1,0 +1,351 @@
+!! should leave a canonical changelog untouched !!
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+
+## [1.1.0] - 2024-02-01
+
+### Added
+
+- New thing.
+
+### Fixed
+
+- Old bug.
+
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Initial release.
+
+[Unreleased]: https://example.com/compare/v1.1.0...HEAD
+[1.1.0]: https://example.com/compare/v1.0.0...v1.1.0
+[1.0.0]: https://example.com/releases/tag/v1.0.0
+
+[expect]
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+
+## [1.1.0] - 2024-02-01
+
+### Added
+
+- New thing.
+
+### Fixed
+
+- Old bug.
+
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Initial release.
+
+[Unreleased]: https://example.com/compare/v1.1.0...HEAD
+[1.1.0]: https://example.com/compare/v1.0.0...v1.1.0
+[1.0.0]: https://example.com/releases/tag/v1.0.0
+
+!! should add blank lines around headings and trim trailing whitespace !!
+# Changelog
+All notable changes.
+## [Unreleased]
+### Added
+- Thing.
+## [1.0.0] - 2024-01-01
+### Fixed
+- Bug.
+
+[expect]
+# Changelog
+
+All notable changes.
+
+## [Unreleased]
+
+### Added
+
+- Thing.
+
+## [1.0.0] - 2024-01-01
+
+### Fixed
+
+- Bug.
+
+!! should collapse repeated blank lines and add the final newline !!
+# Changelog
+
+
+
+## [1.0.0] - 2024-01-01
+
+
+### Added
+
+
+- Thing.
+[expect]
+# Changelog
+
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+!! should use dash list markers !!
+## [1.0.0] - 2024-01-01
+
+### Added
+
+* One
++ Two
+  * Nested
+- Three
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- One
+- Two
+  - Nested
+- Three
+
+!! should not touch fenced code blocks !!
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Example:
+
+```md
+* star
+## [9.9.9] - not a release
+
+
+### Added
+```
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Example:
+
+```md
+* star
+## [9.9.9] - not a release
+
+
+### Added
+```
+
+!! should normalize release heading separator and yanked marker !!
+## [1.0.1]   –   2024-01-02   [yanked]
+
+### Fixed
+
+- Bug.
+
+## [1.0.0]-2024-01-01
+
+### Added
+
+- Thing.
+
+[expect]
+## [1.0.1] - 2024-01-02 [YANKED]
+
+### Fixed
+
+- Bug.
+
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+!! should fix section name casing !!
+## [1.0.0] - 2024-01-01
+
+### added
+
+- Thing.
+
+### FIXED:
+
+- Bug.
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+### Fixed
+
+- Bug.
+
+!! should remove empty sections !!
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+### Removed
+
+### Fixed
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+!! should keep an empty unreleased section !!
+# Changelog
+
+## [Unreleased]
+
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+[expect]
+# Changelog
+
+## [Unreleased]
+
+## [1.0.0] - 2024-01-01
+
+### Added
+
+- Thing.
+
+!! should keep the order of sections by default !!
+## [1.0.0] - 2024-01-01
+
+### Fixed
+
+- Bug.
+
+### Added
+
+- Thing.
+
+[expect]
+## [1.0.0] - 2024-01-01
+
+### Fixed
+
+- Bug.
+
+### Added
+
+- Thing.
+
+!! should keep the text around the releases untouched !!
+# Changelog
+
+Intro with a [link](https://example.com) and **bold**.
+
+1. First
+2. Second
+
+## [1.0.0] - 2024-01-01
+
+Release notes paragraph.
+
+### Added
+
+- Item with continuation
+  on the next line.
+
+[expect]
+# Changelog
+
+Intro with a [link](https://example.com) and **bold**.
+
+1. First
+2. Second
+
+## [1.0.0] - 2024-01-01
+
+Release notes paragraph.
+
+### Added
+
+- Item with continuation
+  on the next line.
+
+!! should accept a v prefix and unreleased without brackets !!
+## Unreleased
+
+## v1.0.0 - 2024-01-01
+
+### Added
+
+- Thing.
+
+[expect]
+## Unreleased
+
+## v1.0.0 - 2024-01-01
+
+### Added
+
+- Thing.
+
+!! should accept pre-release versions in descending order !!
+## [1.0.0] - 2024-03-01
+
+### Added
+
+- Final.
+
+## [1.0.0-rc.2] - 2024-02-01
+
+### Added
+
+- Second candidate.
+
+## [1.0.0-rc.1] - 2024-01-01
+
+### Added
+
+- First candidate.
+
+[expect]
+## [1.0.0] - 2024-03-01
+
+### Added
+
+- Final.
+
+## [1.0.0-rc.2] - 2024-02-01
+
+### Added
+
+- Second candidate.
+
+## [1.0.0-rc.1] - 2024-01-01
+
+### Added
+
+- First candidate.

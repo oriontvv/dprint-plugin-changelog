@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://plugins.dprint.dev/oriontvv/dprint-plugin-changelog/0.0.0/schema.json",
+  "title": "Config",
+  "type": "object",
+  "definitions": {
+    "newLineKind": {
+      "description": "The newline character to use.",
+      "type": "string",
+      "default": "auto",
+      "oneOf": [
+        { "description": "For each file, uses the newline kind found at the end of the last line.", "type": "string", "enum": ["auto"] },
+        { "description": "Uses carriage return, followed by line feed.", "type": "string", "enum": ["crlf"] },
+        { "description": "Uses line feed.", "type": "string", "enum": ["lf"] },
+        { "description": "Uses the system standard (ex. crlf on Windows).", "type": "string", "enum": ["system"] }
+      ]
+    }
+  },
+  "properties": {
+    "locked": {
+      "description": "Whether the configuration is not allowed to be overridden or extended.",
+      "type": "boolean",
+      "default": false
+    },
+    "associations": {
+      "description": "Glob patterns of files this plugin should format, in addition to CHANGELOG.md.",
+      "type": ["string", "array"],
+      "items": { "type": "string" }
+    },
+    "newLineKind": { "$ref": "#/definitions/newLineKind" },
+    "sortSections": {
+      "description": "Reorder the ### sections of each release as Added, Changed, Deprecated, Removed, Fixed, Security.",
+      "type": "boolean",
+      "default": false
+    },
+    "removeEmptySections": {
+      "description": "Remove ### sections that have no content.",
+      "type": "boolean",
+      "default": true
+    },
+    "requireUnreleased": {
+      "description": "Fail when the changelog has no ## [Unreleased] section.",
+      "type": "boolean",
+      "default": false
+    },
+    "strictSectionNames": {
+      "description": "Fail on ### sections other than Added, Changed, Deprecated, Removed, Fixed and Security.",
+      "type": "boolean",
+      "default": true
+    },
+    "requireReferenceLinks": {
+      "description": "Fail when a release heading has no matching [version]: url link reference definition.",
+      "type": "boolean",
+      "default": false
+    },
+    "additive": {
+      "description": "Run in addition to the plugin that formats Markdown instead of claiming CHANGELOG.md.",
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
