@@ -1,0 +1,28 @@
+name: Release
+
+# Triggered by a semver tag push (e.g. `git tag 1.0.0 && git push --tags`).
+# Builds release binaries, creates a GitHub Release, uploads a `<asset>.sha256`
+# for each asset, and runs the publish jobs enabled in cookiecutter.
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  release:
+    uses: oriontvv/rust-workflows/workflows/release.yml@master
+    with:
+      binary-name: dprint-plugin-changelog
+      enable-crates: true
+      enable-docker: true
+      enable-homebrew: false
+      enable-wix-msi: false
+      docker-image: oriontvv/dprint-plugin-changelog
+      homebrew-tap-repo: oriontvv/homebrew-tap
+      homebrew-description: dprint plugin for changelog files
+      homebrew-homepage: https://github.com/oriontvv/dprint-plugin-changelog
+      homebrew-license: Apache-2.0
+    secrets:
+      CARGO_TOKEN: ${{ secrets.CARGO_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

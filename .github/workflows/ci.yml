@@ -1,0 +1,14 @@
+name: CI
+
+# Calls the shared CI workflow from oriontvv/rust-workflows at ref
+# master. Jobs: check (matrix), test, fmt, clippy, plus the
+# optional wasm / nix / security-audit jobs toggled below.
+on: [push, pull_request]
+
+jobs:
+  ci:
+    uses: oriontvv/rust-workflows/workflows/ci.yml@master
+    with:
+      enable-wasm: true
+      enable-nix: false
+      enable-audit: true

@@ -1,0 +1,16 @@
+name: Coverage
+
+# Runs on the default branch only and force-pushes the generated HTML report to
+# the `coverage` branch.
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  coverage:
+    uses: oriontvv/rust-workflows/workflows/coverage.yml@master
+    permissions:
+      contents: write
+    with:
+      coverage-branch: coverage
