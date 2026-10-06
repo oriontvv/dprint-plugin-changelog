@@ -9,7 +9,7 @@ on:
 
 jobs:
   coverage:
-    uses: oriontvv/rust-workflows/workflows/coverage.yml@master
+    uses: oriontvv/rust-workflows/.github/workflows/coverage.yml@master
     permissions:
       contents: write
     with:

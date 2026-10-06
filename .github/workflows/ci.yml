@@ -7,7 +7,7 @@ on: [push, pull_request]
 
 jobs:
   ci:
-    uses: oriontvv/rust-workflows/workflows/ci.yml@master
+    uses: oriontvv/rust-workflows/.github/workflows/ci.yml@master
     with:
       enable-wasm: true
       enable-nix: false

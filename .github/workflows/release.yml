@@ -10,7 +10,7 @@ on:
 
 jobs:
   release:
-    uses: oriontvv/rust-workflows/workflows/release.yml@master
+    uses: oriontvv/rust-workflows/.github/workflows/release.yml@master
     with:
       binary-name: dprint-plugin-changelog
       enable-crates: true
