@@ -3,10 +3,10 @@ name = "dprint-plugin-changelog"
 version = "0.1.0"
 authors = ["dprint-plugin-changelog contributors"]
 edition = "2021"
-license = "Apache-2.0"
-description = "Linter and formatter for Keep a Changelog CHANGELOG.md files, as a dprint plugin."
-repository = "https://github.com/oriontvv/dprint-plugin-changelog"
 keywords = ["dprint", "changelog", "keep-a-changelog", "formatter", "linter"]
+license = "Apache-2.0"
+repository = "https://github.com/oriontvv/dprint-plugin-changelog"
+description = "Linter and formatter for Keep a Changelog CHANGELOG.md files, as a dprint plugin."
 
 [lib]
 crate-type = ["lib", "cdylib"]

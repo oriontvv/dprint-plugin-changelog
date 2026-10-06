@@ -20,7 +20,9 @@ dprint add oriontvv/dprint-plugin-changelog
 
 ```jsonc
 {
-  "plugins": ["https://plugins.dprint.dev/oriontvv/dprint-plugin-changelog-0.1.0.wasm"]
+  "plugins": [
+    "https://plugins.dprint.dev/oriontvv/dprint-plugin-changelog-0.1.0.wasm"
+  ]
 }
 ```
 
@@ -32,7 +34,9 @@ cargo build --release --target wasm32-unknown-unknown --features wasm
 
 ```jsonc
 {
-  "plugins": ["./target/wasm32-unknown-unknown/release/dprint_plugin_changelog.wasm"],
+  "plugins": [
+    "./target/wasm32-unknown-unknown/release/dprint_plugin_changelog.wasm"
+  ],
   "changelog": {
     "sortSections": true
   }
@@ -56,31 +60,31 @@ Fenced code blocks are never modified. The text of the introduction, notes and l
 
 ## What fails
 
-| Problem | Example message |
-| --- | --- |
-| Invalid semantic version | `'1.0' is not a valid semantic version` |
-| Missing / non-ISO / impossible date | `'2024-13-01' is not a valid calendar date` |
-| Duplicate release | `duplicate release '1.0.0' (first defined on line 1)` |
-| Releases not newest first (semver precedence) | `releases must be listed newest first, ...` |
-| `Unreleased` not first | `'Unreleased' must be the first release` |
-| Unknown section name (`strictSectionNames`) | `unknown section 'Bugfixes' ... (did you mean 'Fixed'?)` |
-| Duplicate section in a release | `duplicate section 'Added' in release '1.0.0'` |
-| Release heading not at level 2 | `release heading ... must be a level 2 heading (##)` |
-| Missing `[Unreleased]` (`requireUnreleased`) | `missing '## [Unreleased]' section` |
-| Missing `[x]: url` definition (`requireReferenceLinks`) | `missing link reference definition '[1.0.0]: <url>'` |
-| Unclosed code fence | `code fence is never closed` |
+| Problem                                                 | Example message                                          |
+| ------------------------------------------------------- | -------------------------------------------------------- |
+| Invalid semantic version                                | `'1.0' is not a valid semantic version`                  |
+| Missing / non-ISO / impossible date                     | `'2024-13-01' is not a valid calendar date`              |
+| Duplicate release                                       | `duplicate release '1.0.0' (first defined on line 1)`    |
+| Releases not newest first (semver precedence)           | `releases must be listed newest first, ...`              |
+| `Unreleased` not first                                  | `'Unreleased' must be the first release`                 |
+| Unknown section name (`strictSectionNames`)             | `unknown section 'Bugfixes' ... (did you mean 'Fixed'?)` |
+| Duplicate section in a release                          | `duplicate section 'Added' in release '1.0.0'`           |
+| Release heading not at level 2                          | `release heading ... must be a level 2 heading (##)`     |
+| Missing `[Unreleased]` (`requireUnreleased`)            | `missing '## [Unreleased]' section`                      |
+| Missing `[x]: url` definition (`requireReferenceLinks`) | `missing link reference definition '[1.0.0]: <url>'`     |
+| Unclosed code fence                                     | `code fence is never closed`                             |
 
 ## Configuration
 
-| Option | Default | Description |
-| --- | --- | --- |
-| `newLineKind` | `auto` | `auto`, `lf`, `crlf` or `system`. |
-| `sortSections` | `false` | Reorder `###` sections. |
-| `removeEmptySections` | `true` | Drop `###` sections without content. |
-| `requireUnreleased` | `false` | Fail without an `## [Unreleased]` section. |
-| `strictSectionNames` | `true` | Fail on sections outside the six standard names. |
-| `requireReferenceLinks` | `false` | Fail when a release has no link reference definition. |
-| `additive` | `false` | Run alongside the Markdown plugin instead of claiming the file. |
+| Option                  | Default | Description                                                     |
+| ----------------------- | ------- | --------------------------------------------------------------- |
+| `newLineKind`           | `auto`  | `auto`, `lf`, `crlf` or `system`.                               |
+| `sortSections`          | `false` | Reorder `###` sections.                                         |
+| `removeEmptySections`   | `true`  | Drop `###` sections without content.                            |
+| `requireUnreleased`     | `false` | Fail without an `## [Unreleased]` section.                      |
+| `strictSectionNames`    | `true`  | Fail on sections outside the six standard names.                |
+| `requireReferenceLinks` | `false` | Fail when a release has no link reference definition.           |
+| `additive`              | `false` | Run alongside the Markdown plugin instead of claiming the file. |
 
 ## Development
 
@@ -95,7 +99,6 @@ Format specs live in `tests/specs/*.txt` (`!! message !!`, `[expect]`), lint rul
 
 1. Set `version` in `Cargo.toml` and commit.
 2. Push a tag equal to that version, without a `v` prefix: `git tag 0.1.0 && git push origin 0.1.0`.
-
 
 ## License
 

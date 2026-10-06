@@ -9,7 +9,11 @@
       "type": "string",
       "default": "auto",
       "oneOf": [
-        { "description": "For each file, uses the newline kind found at the end of the last line.", "type": "string", "enum": ["auto"] },
+        {
+          "description": "For each file, uses the newline kind found at the end of the last line.",
+          "type": "string",
+          "enum": ["auto"]
+        },
         { "description": "Uses carriage return, followed by line feed.", "type": "string", "enum": ["crlf"] },
         { "description": "Uses line feed.", "type": "string", "enum": ["lf"] },
         { "description": "Uses the system standard (ex. crlf on Windows).", "type": "string", "enum": ["system"] }
