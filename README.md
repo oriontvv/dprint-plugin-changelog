@@ -1,5 +1,7 @@
 # dprint-plugin-changelog
 
+[![Actions Status](https://github.com/oriontvv/dprint-plugin-changelog/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/oriontvv/dprint-plugin-changelog/actions/workflows/ci.yml) [![Coverage badge](https://raw.githubusercontent.com/oriontvv/dprint-plugin-changelog/coverage/htmlcov/badges/flat.svg)](https://htmlpreview.github.io/?https://github.com/oriontvv/dprint-plugin-changelog/coverage/htmlcov/index.html) [![dependency status](https://deps.rs/repo/github/oriontvv/dprint-plugin-changelog/status.svg)](https://deps.rs/repo/github/oriontvv/dprint-plugin-changelog) [![Crates.io](https://img.shields.io/crates/v/dprint-plugin-changelog.svg)](https://crates.io/crates/dprint-plugin-changelog)
+
 [dprint](https://dprint.dev) plugin that lints and formats `CHANGELOG.md` files written in the
 [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/) style.
 

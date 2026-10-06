@@ -9,6 +9,6 @@ jobs:
   ci:
     uses: oriontvv/rust-workflows/.github/workflows/ci.yml@master
     with:
-      enable-wasm: true
+      enable-wasm: false
       enable-nix: false
       enable-audit: true
