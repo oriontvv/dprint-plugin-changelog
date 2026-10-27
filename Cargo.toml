@@ -28,7 +28,7 @@ path = "tests/spec_test.rs"
 harness = false
 
 [dependencies]
-dprint-core = { version = "0.70.0", default-features = false }
+dprint-core = { version = "0.71.1", default-features = false }
 parse-changelog = { version = "0.6.17", default-features = false }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1", optional = true }
